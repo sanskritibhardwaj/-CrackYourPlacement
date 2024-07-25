@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        
+        ListNode curr = head; // Current node
+        ListNode nextNode = curr.next; // Next node
+        int last = curr.val; // Value of the current node
+        
+        while (nextNode != null) { // While end of Linked list
+            if (curr.val == nextNode.val) { // Current number same as next node's number
+                if (nextNode.next == null) { // If next node is the last element, just delete and break loop
+                    curr.next = null;
+                    break;
+                }
+                nextNode = nextNode.next; // Not the last element, move to next node
+                curr.next = nextNode; // Skip the duplicate node
+            } else { // If not the same as the last element, update pointers
+                curr = nextNode;
+                last = curr.val;
+                nextNode = nextNode.next;
+            }
+        }
+        
+        return head; // Return the head of the modified list
+    }
+}
